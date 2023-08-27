@@ -26,6 +26,7 @@ CFLAGS= -g -Wall -Wno-unused -Wno-write-strings ${CPPINCLUDE}
 FLEX=flex ${FFLAGS}
 DEPEND = ${CC} -MM ${CPPINCLUDE}
 
+LDFLAGS= -static
 
 source : ${SRC} ${TSRC} ${LSRC} ${LIBS} lsource
 
@@ -36,7 +37,7 @@ ${OUTPUT}:	lexer test.cl
 	-./lexer test.cl >test.output 2>&1 
 
 lexer: ${OBJS}
-	${CC} ${CFLAGS} ${OBJS} ${LIB} -o lexer
+	${CC} ${CFLAGS} ${OBJS} ${LIB} ${LDFLAGS} -o lexer
 
 .cc.o:
 	${CC} ${CFLAGS} -c $<
